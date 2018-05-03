@@ -8,5 +8,6 @@ To launch the Mobile Flashcards app using the iOS simulator, run the following c
 ```
 cd mobile-flashcards
 yarn install
+open "rndebugger://set-debugger-loc?host=localhost&port=19001" (to use React Native Debugger)
 yarn start i
 ```
