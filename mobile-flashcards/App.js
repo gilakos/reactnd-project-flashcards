@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { ConnectedRouter } from 'react-router-redux'
-import createHistory from 'history/createMemoryHistory'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 import { View, Platform, StatusBar } from 'react-native'
+
+import createHistory from 'history/createMemoryHistory'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './redux/reducers'
+
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
@@ -40,7 +45,7 @@ const FlashCardTabs = TabNavigator(
           <Ionicons name="ios-add-circle" size={30} color={tintColor} />
         )
       }
-     }
+    }
   },
   {
     tabBarComponent: TabBarBottom,
@@ -59,13 +64,15 @@ const FlashCardTabs = TabNavigator(
 export default class App extends Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <FlashCardsStatusBar
-          backgroundColor={colors.LIGHTPURPLE}
-          barStyle="light-content"
-        />
-        <FlashCardTabs />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+          <FlashCardsStatusBar
+            backgroundColor={colors.LIGHTPURPLE}
+            barStyle="light-content"
+          />
+          <FlashCardTabs />
+        </View>
+      </Provider>
     )
   }
 }
