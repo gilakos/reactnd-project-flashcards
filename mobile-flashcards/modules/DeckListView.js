@@ -28,7 +28,7 @@ class DeckListView extends Component {
       .then(this.setState({ hasReceivedDecks: true }))
   }
   render() {
-    const { decks } = this.props
+    const { decks, navigation } = this.props
     const numberOfDecks = Object.keys(decks).length
     console.log(decks)
     console.log(numberOfDecks)
@@ -45,7 +45,13 @@ class DeckListView extends Component {
           {numberOfDecks > 0 ? (
             _.map(decks, deck => {
               console.log(deck)
-              return <DeckItem title={deck.title} num_cards={deck.questions.length} key={deck.title}/>
+              return (
+                <DeckItem
+                  deck={deck}
+                  navigation={navigation}
+                  key={deck.title}
+                />
+              )
             })
           ) : (
             <Text>

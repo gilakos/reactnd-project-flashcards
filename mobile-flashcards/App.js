@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
 import DeckList from './modules/DeckListView'
+import Deck from './modules/DeckIndividualView'
 import DeckNew from './modules/DeckNewView'
 
 import * as colors from './utils/colors'
@@ -38,6 +39,16 @@ const FlashCardsNavigator = StackNavigator(
       screen: DeckNew,
       navigationOptions: {
         title: 'New Flash Card Deck',
+        headerTintColor: colors.WHITE,
+        headerStyle: {
+          backgroundColor: colors.LIGHTPURPLE
+        }
+      }
+    },
+    Deck: {
+      screen: Deck,
+      navigationOptions: {
+        title: 'Deck',
         headerTintColor: colors.WHITE,
         headerStyle: {
           backgroundColor: colors.LIGHTPURPLE

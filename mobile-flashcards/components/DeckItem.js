@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 import * as colors from '../utils/colors'
 
 export default class DeckItem extends Component {
   render() {
-    const { title, num_cards } = this.props
+    const { deck, navigation } = this.props
     return (
-      <View style={styles.deckView}>
-        <Text style={styles.deckTitle}>{title}</Text>
-        <Text style={styles.cardsInfo}>{`${num_cards} cards`}</Text>
-      </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Deck', { activeDeck: deck })}
+      >
+        <View style={styles.deckView}>
+          <Text style={styles.deckTitle}>{deck.title}</Text>
+          <Text style={styles.cardsInfo}>{`${
+            deck.questions.length
+          } cards`}</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 }
