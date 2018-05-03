@@ -3,10 +3,8 @@ import { ConnectedRouter } from 'react-router-redux'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 import { View, Platform, StatusBar } from 'react-native'
 
-import createHistory from 'history/createMemoryHistory'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './redux/reducers'
+import store from './redux/store'
 
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
@@ -15,8 +13,6 @@ import DeckList from './modules/deck_list/DeckListView'
 import DeckNew from './modules/deck_new/DeckNewView'
 
 import * as colors from './utils/colors'
-
-const history = createHistory()
 
 function FlashCardsStatusBar({ backgroundColor, ...props }) {
   return (
@@ -64,7 +60,7 @@ const FlashCardTabs = TabNavigator(
 export default class App extends Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={{ flex: 1 }}>
           <FlashCardsStatusBar
             backgroundColor={colors.LIGHTPURPLE}
