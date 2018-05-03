@@ -45,7 +45,7 @@ class DeckListView extends Component {
           {numberOfDecks > 0 ? (
             _.map(decks, deck => {
               console.log(deck)
-              return <DeckItem title={deck.title} num_cards={deck.questions.length}/>
+              return <DeckItem title={deck.title} num_cards={deck.questions.length} key={deck.title}/>
             })
           ) : (
             <Text>
