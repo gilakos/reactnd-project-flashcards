@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import {
   ActivityIndicator,
+  Dimensions,
   View,
   ScrollView,
+  TouchableOpacity,
   Text,
   StyleSheet
 } from 'react-native'
@@ -30,8 +32,6 @@ class DeckListView extends Component {
   render() {
     const { decks, navigation } = this.props
     const numberOfDecks = Object.keys(decks).length
-    console.log(decks)
-    console.log(numberOfDecks)
     if (!this.state.hasReceivedDecks) {
       return (
         <View style={styles.container}>
@@ -60,15 +60,36 @@ class DeckListView extends Component {
             </Text>
           )}
         </ScrollView>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => navigation.navigate('NewDeck')}>
+          <Text style={styles.buttonText}>Add a New Deck</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
+const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.WHITE
+  },
+  actionButton: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    margin: 20,
+    marginBottom: 30,
+    height: 70,
+    borderRadius: 140,
+    width: width-60,
+    backgroundColor: colors.SEAGREEN
+  },
+  buttonText: {
+    color: colors.WHITE
   }
 })
 
