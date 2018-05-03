@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ConnectedRouter } from 'react-router-redux'
-import { TabNavigator, TabBarBottom } from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
 import { View, Platform, StatusBar } from 'react-native'
 
 import { Provider } from 'react-redux'
@@ -22,38 +22,28 @@ function FlashCardsStatusBar({ backgroundColor, ...props }) {
   )
 }
 
-const FlashCardTabs = TabNavigator(
+const FlashCardsNavigator = StackNavigator(
   {
     Decks: {
       screen: DeckList,
       navigationOptions: {
-        tabBarLabel: 'Decks',
-        tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-albums" size={30} color={tintColor} />
-        )
+        title: 'Flash Cards',
+        headerTintColor: colors.WHITE,
+        headerStyle: {
+          backgroundColor: colors.LIGHTPURPLE
+        }
       }
     },
     NewDeck: {
       screen: DeckNew,
       navigationOptions: {
-        tabBarLabel: 'Add Deck',
-        tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-add-circle" size={30} color={tintColor} />
-        )
+        title: 'New Flash Card Deck',
+        headerTintColor: colors.WHITE,
+        headerStyle: {
+          backgroundColor: colors.LIGHTPURPLE
+        }
       }
     }
-  },
-  {
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
-    tabBarOptions: {
-      activeTintColor: colors.LIGHTPURPLE,
-      inactiveTintColor: colors.SUPERGRAY
-    },
-    showIcon: true,
-    showLabel: true,
-    animationEnabled: false,
-    swipeEnabled: false
   }
 )
 
@@ -66,7 +56,7 @@ export default class App extends Component {
             backgroundColor={colors.LIGHTPURPLE}
             barStyle="light-content"
           />
-          <FlashCardTabs />
+          <FlashCardsNavigator />
         </View>
       </Provider>
     )
