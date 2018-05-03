@@ -2,13 +2,13 @@ import { AsyncStorage } from 'react-native'
 
 export const DECKS_KEY = 'flashcards:decks'
 
-function fetchDecks() {
+export function fetchDecks() {
   return AsyncStorage.getItem(DECKS_KEY).then(results => {
     return JSON.parse(results)
   })
 }
 
-function fetchDeck(id) {
+export function fetchDeck(id) {
   return AsyncStorage.getItem(DECKS_KEY).then(results => {
     return results[id]
   })
