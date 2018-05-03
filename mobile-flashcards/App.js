@@ -9,8 +9,8 @@ import store from './redux/store'
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
-import DeckList from './modules/deck_list/DeckListView'
-import DeckNew from './modules/deck_new/DeckNewView'
+import DeckList from './modules/DeckListView'
+import DeckNew from './modules/DeckNewView'
 
 import * as colors from './utils/colors'
 
