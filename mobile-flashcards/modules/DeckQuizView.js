@@ -11,29 +11,29 @@ import _ from 'lodash'
 
 import * as colors from '../utils/colors'
 
-class DeckIndividualView extends Component {
+class DeckQuizView extends Component {
   render() {
-    const { deck, navigation } = this.props
+    const { deck } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.deckView}>
-          <Text style={styles.deckTitle}>{deck.title}</Text>
+          <Text style={styles.deckTitle}>{`${deck.title} Quiz`}</Text>
           <Text style={styles.cardsInfo}>
-            {`${deck.questions.length} cards`}
+            Show Answer
           </Text>
         </View>
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
-            onPress={() => navigation.navigate('NewDeck')}
+            onPress={() => console.log('correct')}
           >
-            <Text style={styles.buttonTextPrimary}>Add Card</Text>
+            <Text style={styles.buttonTextPrimary}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.actionButton, styles.buttonSecondary]}
-            onPress={() => navigation.navigate('Quiz', { currentDeck: deck })}
+            style={[styles.actionButton, styles.buttonTertiary]}
+            onPress={() => console.log('incorrect')}
           >
-            <Text style={styles.buttonTextSecondary}>Start Quiz</Text>
+            <Text style={styles.buttonTextPrimary}>Incorrect</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -83,15 +83,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.SEAGREEN,
     borderColor: colors.SEAGREEN
   },
-  buttonSecondary: {
-    backgroundColor: colors.WHITE,
-    borderColor: colors.SEAGREEN
+  buttonTertiary: {
+    backgroundColor: colors.BURNTRED,
+    borderColor: colors.BURNTRED
   },
   buttonTextPrimary: {
     color: colors.WHITE
-  },
-  buttonTextSecondary: {
-    color: colors.SEAGREEN
   }
 })
 
@@ -102,4 +99,4 @@ function mapStateToProps({ decks, navigation }, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(DeckIndividualView)
+export default connect(mapStateToProps)(DeckQuizView)
