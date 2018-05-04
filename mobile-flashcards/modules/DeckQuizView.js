@@ -92,7 +92,6 @@ class DeckQuizView extends Component {
     } else {
       message = `You scored ${score}% in this quiz - keep studying.`
     }
-    console.log(score)
     return (
       <View>
         <View style={styles.deckView}>
@@ -126,8 +125,6 @@ class DeckQuizView extends Component {
       this.state.question_index
     }`
     const quiz_complete = this.state.question_index === deck.questions.length
-    console.log(quiz_complete)
-
     return (
       <View style={styles.container}>
         <View style={styles.progressView}>
