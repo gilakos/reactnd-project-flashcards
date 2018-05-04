@@ -25,15 +25,15 @@ class DeckIndividualView extends Component {
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
-            onPress={() => navigation.navigate('NewDeck')}
+            onPress={() => navigation.navigate('Quiz', { currentDeck: deck })}
           >
-            <Text style={styles.buttonTextPrimary}>Add Card</Text>
+            <Text style={styles.buttonTextPrimary}>Start Quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonSecondary]}
-            onPress={() => navigation.navigate('Quiz', { currentDeck: deck })}
+            onPress={() => navigation.navigate('NewCard')}
           >
-            <Text style={styles.buttonTextSecondary}>Start Quiz</Text>
+            <Text style={styles.buttonTextSecondary}>Add Card</Text>
           </TouchableOpacity>
         </View>
       </View>
