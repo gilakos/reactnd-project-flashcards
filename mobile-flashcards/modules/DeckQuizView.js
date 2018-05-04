@@ -17,17 +17,29 @@ class DeckQuizView extends Component {
     question_index: 0,
     answers_correct: 0
   }
-  render() {
-    const { deck } = this.props
-    const question_progress = `${this.state.question_index + 1} / ${
-      deck.questions.length
-    }`
-    console.log(deck.questions)
+  onCorrect() {
+    this.setState({
+      question_index: this.state.question_index + 1,
+      answers_correct: this.state.answers_correct + 1,
+      showAnswer: false
+    })
+  }
+  onIncorrect() {
+    this.setState({
+      question_index: this.state.question_index + 1,
+      showAnswer: false
+    })
+  }
+  onRestart() {
+    this.setState({
+      question_index: 0,
+      answers_correct: 0,
+      showAnswer: false
+    })
+  }
+  renderQuiz(deck) {
     return (
-      <View style={styles.container}>
-        <View style={styles.progressView}>
-          <Text style={styles.cardsInfo}>{question_progress}</Text>
-        </View>
+      <View>
         {this.state.showAnswer === false ? (
           <View style={styles.deckView}>
             <Text style={styles.deckTitle}>
@@ -55,17 +67,80 @@ class DeckQuizView extends Component {
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
-            onPress={() => console.log('correct')}
+            onPress={() => this.onCorrect()}
           >
             <Text style={styles.buttonTextPrimary}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonTertiary]}
-            onPress={() => console.log('incorrect')}
+            onPress={() => this.onIncorrect()}
           >
             <Text style={styles.buttonTextPrimary}>Incorrect</Text>
           </TouchableOpacity>
         </View>
+      </View>
+    )
+  }
+  renderResults(deck, navigation) {
+    let message = ''
+    let score = (parseFloat(this.state.answers_correct) / parseFloat(deck.questions.length))*100
+    score = parseInt(score)
+    if (score === 100){
+      message = `Congratulations! You scored a perfect ${score}%`
+    } else if (score > 75){
+      message = `Well done. You scored ${score}% in this quiz.`
+    } else {
+      message = `You scored ${score}% in this quiz - keep studying.`
+    }
+    console.log(score)
+    return (
+      <View>
+        <View style={styles.deckView}>
+          <Text style={styles.deckTitle}>
+            {message}
+          </Text>
+        </View>
+        <View style={styles.buttonView}>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.buttonPrimary]}
+            onPress={() => navigation.navigate('Decks')}
+          >
+            <Text style={styles.buttonTextPrimary}>Back to your Decks</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.buttonSecondary]}
+            onPress={() => this.onRestart()}
+          >
+            <Text style={styles.buttonTextSecondary}>Restart Quiz</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
+  render() {
+    const { deck, navigation } = this.props
+    const quiz_progress = `${this.state.question_index + 1} / ${
+      deck.questions.length
+    }`
+    const quiz_score = `${this.state.answers_correct} / ${
+      this.state.question_index
+    }`
+    const quiz_complete = this.state.question_index === deck.questions.length
+    console.log(quiz_complete)
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.progressView}>
+          <Text
+            style={styles.cardsInfo}
+          >{`Quiz Progress: ${quiz_progress}`}</Text>
+          <Text style={styles.cardsInfo}>{`Quiz Score: ${quiz_score}`}</Text>
+        </View>
+        {quiz_complete === true ? (
+          <View>{this.renderResults(deck, navigation)}</View>
+        ) : (
+          <View>{this.renderQuiz(deck)}</View>
+        )}
       </View>
     )
   }
@@ -119,12 +194,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.SEAGREEN,
     borderColor: colors.SEAGREEN
   },
+  buttonSecondary: {
+    backgroundColor: colors.WHITE,
+    borderColor: colors.SEAGREEN
+  },
   buttonTertiary: {
     backgroundColor: colors.BURNTRED,
     borderColor: colors.BURNTRED
   },
   buttonTextPrimary: {
     color: colors.WHITE
+  },
+  buttonTextSecondary: {
+    color: colors.SEAGREEN
   }
 })
 
