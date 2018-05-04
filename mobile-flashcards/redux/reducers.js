@@ -13,6 +13,10 @@ const sampleData = {
       {
         question: 'Where do you make Ajax requests in React?',
         answer: 'The componentDidMount lifecycle event'
+      },
+      {
+        question: 'How does a component maintain internal data?',
+        answer: 'Through this.state'
       }
     ]
   },
@@ -29,7 +33,7 @@ const sampleData = {
   }
 }
 
-function decks (state = sampleData, action) {
+function decks(state = sampleData, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
@@ -39,12 +43,16 @@ function decks (state = sampleData, action) {
     case ADD_DECK:
       return {
         ...state,
-        ...action.deck,
-      }
+        [action.deck.title]: {
+					title: action.deck.title,
+          id: action.deck.id,
+          questions: []
+				}
+			}
     case UPDATE_DECK:
       return {
         ...state,
-        ...action.deck,
+        ...action.deck
       }
     default:
       return state
@@ -52,5 +60,5 @@ function decks (state = sampleData, action) {
 }
 
 export default combineReducers({
-	decks
+  decks
 })
