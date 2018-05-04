@@ -4,6 +4,7 @@ import { RECEIVE_DECKS, ADD_DECK, UPDATE_DECK } from './actions'
 const sampleData = {
   React: {
     title: 'React',
+    id: 0,
     questions: [
       {
         question: 'What is React?',
@@ -17,6 +18,7 @@ const sampleData = {
   },
   JavaScript: {
     title: 'JavaScript',
+    id: 1,
     questions: [
       {
         question: 'What is a closure?',

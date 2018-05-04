@@ -44,12 +44,11 @@ class DeckListView extends Component {
         <ScrollView>
           {numberOfDecks > 0 ? (
             _.map(decks, deck => {
-              console.log(deck)
               return (
                 <DeckItem
                   deck={deck}
                   navigation={navigation}
-                  key={deck.title}
+                  key={deck.id}
                 />
               )
             })
@@ -61,9 +60,9 @@ class DeckListView extends Component {
           )}
         </ScrollView>
         <TouchableOpacity
-          style={styles.actionButton}
+          style={[styles.actionButton, styles.buttonPrimary]}
           onPress={() => navigation.navigate('NewDeck')}>
-          <Text style={styles.buttonText}>Add a New Deck</Text>
+          <Text style={styles.buttonTextPrimary}>Add a New Deck</Text>
         </TouchableOpacity>
       </View>
     )
@@ -82,15 +81,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     margin: 20,
-    marginBottom: 30,
+    marginBottom: 15,
     height: 70,
     borderRadius: 140,
     width: width-60,
-    backgroundColor: colors.SEAGREEN
+    borderWidth: 1,
   },
-  buttonText: {
+  buttonPrimary: {
+    backgroundColor: colors.SEAGREEN,
+    borderColor: colors.SEAGREEN
+  },
+  buttonTextPrimary: {
     color: colors.WHITE
-  }
+  },
 })
 
 function mapStateToProps({ decks }) {
