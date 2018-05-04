@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { Navigation, Card } from 'react-router-navigation'
 
+import Field from '../components/FieldItem'
 import * as colors from '../utils/colors'
 
 export default class CardNewView extends Component {
@@ -20,10 +21,18 @@ export default class CardNewView extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.cardView}>
-          <Text>Question Field</Text>
-          <Text>Answer Field</Text>
+          <Field
+            label="Question"
+            value={this.state.question}
+            onChangeText={question => this.setState({ question })}
+          />
+          <Field
+            label="Answer"
+            value={this.state.answer}
+            onChangeText={answer => this.setState({ answer })}
+          />
         </View>
-        <View >
+        <View>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
             onPress={() => console.log('save card')}
@@ -65,8 +74,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     height: 70,
     borderRadius: 140,
-    width: width-60,
-    borderWidth: 1,
+    width: width - 60,
+    borderWidth: 1
   },
   buttonPrimary: {
     backgroundColor: colors.SEAGREEN,
@@ -74,5 +83,5 @@ const styles = StyleSheet.create({
   },
   buttonTextPrimary: {
     color: colors.WHITE
-  },
+  }
 })
