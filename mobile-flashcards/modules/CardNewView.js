@@ -17,6 +17,9 @@ export default class CardNewView extends Component {
     question: '',
     answer: ''
   }
+  saveCard() {
+    console.log('save card: ', this.state)
+  }
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -35,7 +38,7 @@ export default class CardNewView extends Component {
         <View>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
-            onPress={() => console.log('save card')}
+            onPress={() => this.saveCard()}
           >
             <Text style={styles.buttonTextPrimary}>Save</Text>
           </TouchableOpacity>
