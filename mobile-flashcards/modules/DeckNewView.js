@@ -8,20 +8,36 @@ import {
   StyleSheet
 } from 'react-native'
 import { Navigation, Card } from 'react-router-navigation'
+import { connect } from 'react-redux'
 
+import { addDeck } from '../redux/actions'
 import Field from '../components/FieldItem'
 
 import * as colors from '../utils/colors'
 
-export default class DeckNewView extends Component {
+class DeckNewView extends Component {
   state = {
     title: ''
   }
   saveDeck() {
-    console.log('save deck: ', this.state)
+    const { navigation, addDeck } = this.props
+    const deck = {
+      title: this.state.title,
+      id: 2,
+    }
+    console.log(
+      JSON.stringify({
+        [deck.title]: {
+          title: deck.title,
+          id: deck.id,
+          questions: []
+        }
+      })
+    )
+    addDeck(deck)
+    navigation.navigate('Decks')
   }
   render() {
-    const { deck } = this.props
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.deckView}>
@@ -87,3 +103,11 @@ const styles = StyleSheet.create({
     color: colors.WHITE
   }
 })
+
+function mapStateToProps({ decks }) {
+	return {
+		decks
+	}
+}
+
+export default connect(mapStateToProps, { addDeck })(DeckNewView)
