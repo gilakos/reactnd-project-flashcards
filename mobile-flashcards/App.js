@@ -15,6 +15,8 @@ import DeckNew from './modules/DeckNewView'
 
 import * as colors from './utils/colors'
 
+console.disableYellowBox = true
+
 function FlashCardsStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
