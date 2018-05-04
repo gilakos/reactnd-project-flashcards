@@ -12,6 +12,7 @@ import { Constants } from 'expo'
 import DeckList from './modules/DeckListView'
 import Deck from './modules/DeckIndividualView'
 import DeckNew from './modules/DeckNewView'
+import CardNew from './modules/CardNewView'
 import DecQuiz from './modules/DeckQuizView'
 
 import * as colors from './utils/colors'
@@ -38,6 +39,16 @@ const FlashCardsNavigator = StackNavigator(
         }
       }
     },
+    Deck: {
+      screen: Deck,
+      navigationOptions: {
+        title: 'Deck',
+        headerTintColor: colors.WHITE,
+        headerStyle: {
+          backgroundColor: colors.LIGHTPURPLE
+        }
+      }
+    },
     NewDeck: {
       screen: DeckNew,
       navigationOptions: {
@@ -48,10 +59,10 @@ const FlashCardsNavigator = StackNavigator(
         }
       }
     },
-    Deck: {
-      screen: Deck,
+    NewCard: {
+      screen: CardNew,
       navigationOptions: {
-        title: 'Deck',
+        title: 'New Card',
         headerTintColor: colors.WHITE,
         headerStyle: {
           backgroundColor: colors.LIGHTPURPLE
