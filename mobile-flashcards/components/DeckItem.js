@@ -8,7 +8,7 @@ export default class DeckItem extends Component {
     const { deck, navigation } = this.props
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate('Deck', { activeDeck: deck })}
+        onPress={() => navigation.navigate('Deck', { currentDeck: deck })}
       >
         <View style={styles.deckView}>
           <Text style={styles.deckTitle}>{deck.title}</Text>
