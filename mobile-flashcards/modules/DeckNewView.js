@@ -25,15 +25,6 @@ class DeckNewView extends Component {
       title: this.state.title,
       id: 2,
     }
-    console.log(
-      JSON.stringify({
-        [deck.title]: {
-          title: deck.title,
-          id: deck.id,
-          questions: []
-        }
-      })
-    )
     addDeck(deck)
     navigation.navigate('Decks')
   }
