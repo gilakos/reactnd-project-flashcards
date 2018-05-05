@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_DECKS, ADD_DECK, UPDATE_DECK } from './actions'
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, UPDATE_DECK } from './actions'
 
 const sampleData = {
-  React: {
+  'cbb5bc04-5e3d-415f-b7f1-d105717c071f': {
     title: 'React',
-    id: 0,
     questions: [
       {
         question: 'What is React?',
@@ -20,9 +19,8 @@ const sampleData = {
       }
     ]
   },
-  JavaScript: {
+  '5f34aabe-1ebf-4400-a20a-29c1c754507c': {
     title: 'JavaScript',
-    id: 1,
     questions: [
       {
         question: 'What is a closure?',
@@ -43,10 +41,17 @@ function decks(state = sampleData, action) {
     case ADD_DECK:
       return {
         ...state,
-        [action.deck.title]: {
+        [action.deck.id]: {
 					title: action.deck.title,
           id: action.deck.id,
           questions: []
+				}
+			}
+    case ADD_CARD:
+      return {
+        ...state,
+        [action.id]: {
+          questions: [action.card]
 				}
 			}
     case UPDATE_DECK:
