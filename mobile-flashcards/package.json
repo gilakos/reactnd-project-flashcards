@@ -36,6 +36,7 @@
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^5.1.1",
     "redux-saga": "^0.16.0",
+    "uuid": "^3.2.1",
     "watchman": "^1.0.0"
   }
 }
