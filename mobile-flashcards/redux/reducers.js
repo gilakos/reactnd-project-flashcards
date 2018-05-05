@@ -31,7 +31,7 @@ const sampleData = {
   }
 }
 
-function decks(state = sampleData, action) {
+function decks(state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {

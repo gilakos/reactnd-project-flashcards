@@ -24,13 +24,16 @@ class DeckListView extends Component {
     hasReceivedDecks: false
   }
   componentDidMount() {
-    const { dispatch } = this.props
+    const { receiveDecks } = this.props
     fetchDecks()
-      .then(decks => dispatch(receiveDecks(decks)))
+      .then(decks => console.log(decks))
+    fetchDecks()
+      .then(decks => receiveDecks(decks))
       .then(this.setState({ hasReceivedDecks: true }))
   }
   render() {
     const { decks, navigation } = this.props
+    console.log(decks)
     const numberOfDecks = Object.keys(decks).length
     if (!this.state.hasReceivedDecks) {
       return (
@@ -45,23 +48,21 @@ class DeckListView extends Component {
           {numberOfDecks > 0 ? (
             _.map(decks, deck => {
               return (
-                <DeckItem
-                  deck={deck}
-                  navigation={navigation}
-                  key={deck.id}
-                />
+                <DeckItem deck={deck} navigation={navigation} key={deck.id} />
               )
             })
           ) : (
-            <Text>
-              You do not currently have any flashcard decks. Click below to
-              create one.
-            </Text>
+            <View style={styles.deckView}>
+              <Text style={styles.deckTitle}>
+                You do not currently have any flashcard decks.
+                Click below to create one.</Text>
+            </View>
           )}
         </ScrollView>
         <TouchableOpacity
           style={[styles.actionButton, styles.buttonPrimary]}
-          onPress={() => navigation.navigate('NewDeck')}>
+          onPress={() => navigation.navigate('NewDeck')}
+        >
           <Text style={styles.buttonTextPrimary}>Add a New Deck</Text>
         </TouchableOpacity>
       </View>
@@ -75,6 +76,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.WHITE
   },
+  deckView: {
+    backgroundColor: colors.WHITE,
+    paddingVertical: 160,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: colors.LIGHTGRAY
+  },
+  deckTitle: {
+    fontSize: 20,
+    color: colors.LIGHTPURPLE
+  },
   actionButton: {
     alignSelf: 'center',
     justifyContent: 'center',
@@ -84,8 +98,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     height: 70,
     borderRadius: 140,
-    width: width-60,
-    borderWidth: 1,
+    width: width - 60,
+    borderWidth: 1
   },
   buttonPrimary: {
     backgroundColor: colors.SEAGREEN,
@@ -93,7 +107,7 @@ const styles = StyleSheet.create({
   },
   buttonTextPrimary: {
     color: colors.WHITE
-  },
+  }
 })
 
 function mapStateToProps({ decks }) {
@@ -102,4 +116,4 @@ function mapStateToProps({ decks }) {
   }
 }
 
-export default connect(mapStateToProps, { fetchDecks })(DeckListView)
+export default connect(mapStateToProps, { receiveDecks })(DeckListView)

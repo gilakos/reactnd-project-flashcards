@@ -4,15 +4,14 @@ export const DECKS_KEY = 'flashcards:decks'
 
 export function fetchDecks() {
   //AsyncStorage.clear()
-  return AsyncStorage.getItem(DECKS_KEY).then(results => {
-    console.log(results)
-    return JSON.parse(results)
-  })
+  return AsyncStorage.getItem(DECKS_KEY).then(results =>
+    JSON.parse(results)
+  )
 }
 
 export function fetchDeck(id) {
   return AsyncStorage.getItem(DECKS_KEY).then(results => {
-    return results[id]
+    results[id]
   })
 }
 
@@ -21,6 +20,7 @@ export function saveDeck(deck) {
     DECKS_KEY,
     JSON.stringify({
       [deck.id]: {
+        id: deck.id,
         title: deck.title,
         questions: []
       }

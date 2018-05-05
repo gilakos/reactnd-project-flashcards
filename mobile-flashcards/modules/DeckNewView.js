@@ -8,9 +8,11 @@ import {
   StyleSheet
 } from 'react-native'
 import { Navigation, Card } from 'react-router-navigation'
-import { connect } from 'react-redux'
+const uuid = require('uuid/v4')
 
+import { connect } from 'react-redux'
 import { addDeck } from '../redux/actions'
+
 import Field from '../components/FieldItem'
 
 import * as colors from '../utils/colors'
@@ -23,7 +25,7 @@ class DeckNewView extends Component {
     const { navigation, addDeck } = this.props
     const deck = {
       title: this.state.title,
-      id: 2,
+      id: uuid(),
     }
     addDeck(deck)
     navigation.navigate('Decks')
