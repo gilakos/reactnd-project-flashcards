@@ -31,7 +31,7 @@ class DeckIndividualView extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonSecondary]}
-            onPress={() => navigation.navigate('NewCard')}
+            onPress={() => navigation.navigate('NewCard', { currentDeck: deck })}
           >
             <Text style={styles.buttonTextSecondary}>Add Card</Text>
           </TouchableOpacity>
