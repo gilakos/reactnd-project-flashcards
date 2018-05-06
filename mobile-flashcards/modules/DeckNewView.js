@@ -28,7 +28,7 @@ class DeckNewView extends Component {
       id: uuid(),
     }
     addDeck(deck)
-    navigation.navigate('Decks')
+    navigation.navigate('Deck', { currentDeck: deck })
   }
   render() {
     return (
