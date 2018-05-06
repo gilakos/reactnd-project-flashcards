@@ -26,6 +26,7 @@ class DeckIndividualView extends Component {
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
             onPress={() => navigation.navigate('Quiz', { currentDeck: deck })}
+            disabled={deck.questions.length===0}
           >
             <Text style={styles.buttonTextPrimary}>Start Quiz</Text>
           </TouchableOpacity>
