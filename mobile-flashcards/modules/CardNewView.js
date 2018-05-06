@@ -9,16 +9,26 @@ import {
 } from 'react-native'
 import { Navigation, Card } from 'react-router-navigation'
 
+import { connect } from 'react-redux'
+import { addCard } from '../redux/actions'
 import Field from '../components/FieldItem'
+
 import * as colors from '../utils/colors'
 
-export default class CardNewView extends Component {
+class CardNewView extends Component {
   state = {
     question: '',
     answer: ''
   }
   saveCard() {
-    console.log('save card: ', this.state)
+    const { navigation, addCard } = this.props
+    const { currentDeck } = navigation.state.params
+    const card = {
+      question: this.state.question,
+      answer: this.state.answer
+    }
+    addCard(currentDeck, card)
+    navigation.goBack()
   }
   render() {
     return (
@@ -88,3 +98,5 @@ const styles = StyleSheet.create({
     color: colors.WHITE
   }
 })
+
+export default connect(null, { addCard })(CardNewView)
