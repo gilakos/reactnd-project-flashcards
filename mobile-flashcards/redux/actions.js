@@ -20,11 +20,11 @@ export function addDeck (deck) {
   }
 }
 
-export function addCard (deck_id, card) {
-  saveCard(deck_id, card)
+export function addCard(deck, card) {
+  saveCard(deck, card)
   return {
     type: ADD_CARD,
-    deck_id,
+    deck,
     card
   }
 }

@@ -42,18 +42,23 @@ function decks(state = {}, action) {
       return {
         ...state,
         [action.deck.id]: {
-					title: action.deck.title,
+          title: action.deck.title,
           id: action.deck.id,
           questions: []
-				}
-			}
+        }
+      }
     case ADD_CARD:
+      const { deck, card } = action
       return {
         ...state,
-        [action.id]: {
-          questions: [action.card]
-				}
-			}
+        [deck.id]: {
+          ...state[deck.id],
+          questions: [
+            ...state[deck.id].questions,
+            action.card
+          ]
+        }
+      }
     case UPDATE_DECK:
       return {
         ...state,
