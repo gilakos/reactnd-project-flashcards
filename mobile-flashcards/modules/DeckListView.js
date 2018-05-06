@@ -26,14 +26,11 @@ class DeckListView extends Component {
   componentDidMount() {
     const { receiveDecks } = this.props
     fetchDecks()
-      .then(decks => console.log(decks))
-    fetchDecks()
       .then(decks => receiveDecks(decks))
       .then(this.setState({ hasReceivedDecks: true }))
   }
   render() {
     const { decks, navigation } = this.props
-    console.log(decks)
     const numberOfDecks = Object.keys(decks).length
     if (!this.state.hasReceivedDecks) {
       return (
