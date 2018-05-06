@@ -9,6 +9,11 @@ import {
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/notifications'
+
 import * as colors from '../utils/colors'
 
 class DeckQuizView extends Component {
@@ -83,21 +88,23 @@ class DeckQuizView extends Component {
   }
   renderResults(deck, navigation) {
     let message = ''
-    let score = (parseFloat(this.state.answers_correct) / parseFloat(deck.questions.length))*100
+    let score =
+      parseFloat(this.state.answers_correct) /
+      parseFloat(deck.questions.length) *
+      100
     score = parseInt(score)
-    if (score === 100){
+    if (score === 100) {
       message = `Congratulations! You scored a perfect ${score}%`
-    } else if (score > 75){
+    } else if (score > 75) {
       message = `Well done. You scored ${score}% in this quiz.`
     } else {
       message = `You scored ${score}% in this quiz - keep studying.`
     }
+    clearLocalNotification().then(setLocalNotification)
     return (
       <View>
         <View style={styles.deckView}>
-          <Text style={styles.deckTitle}>
-            {message}
-          </Text>
+          <Text style={styles.deckTitle}>{message}</Text>
         </View>
         <View style={styles.buttonView}>
           <TouchableOpacity

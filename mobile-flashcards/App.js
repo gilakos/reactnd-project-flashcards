@@ -15,6 +15,7 @@ import DeckNew from './modules/DeckNewView'
 import CardNew from './modules/CardNewView'
 import DecQuiz from './modules/DeckQuizView'
 
+import { setLocalNotification } from './utils/notifications'
 import * as colors from './utils/colors'
 
 console.disableYellowBox = true
@@ -27,62 +28,63 @@ function FlashCardsStatusBar({ backgroundColor, ...props }) {
   )
 }
 
-const FlashCardsNavigator = StackNavigator(
-  {
-    Decks: {
-      screen: DeckList,
-      navigationOptions: {
-        title: 'Flash Cards',
-        headerTintColor: colors.WHITE,
-        headerStyle: {
-          backgroundColor: colors.LIGHTPURPLE
-        }
+const FlashCardsNavigator = StackNavigator({
+  Decks: {
+    screen: DeckList,
+    navigationOptions: {
+      title: 'Flash Cards',
+      headerTintColor: colors.WHITE,
+      headerStyle: {
+        backgroundColor: colors.LIGHTPURPLE
       }
-    },
-    Deck: {
-      screen: Deck,
-      navigationOptions: {
-        title: 'Deck',
-        headerTintColor: colors.WHITE,
-        headerStyle: {
-          backgroundColor: colors.LIGHTPURPLE
-        }
+    }
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      title: 'Deck',
+      headerTintColor: colors.WHITE,
+      headerStyle: {
+        backgroundColor: colors.LIGHTPURPLE
       }
-    },
-    NewDeck: {
-      screen: DeckNew,
-      navigationOptions: {
-        title: 'New Flash Card Deck',
-        headerTintColor: colors.WHITE,
-        headerStyle: {
-          backgroundColor: colors.LIGHTPURPLE
-        }
+    }
+  },
+  NewDeck: {
+    screen: DeckNew,
+    navigationOptions: {
+      title: 'New Flash Card Deck',
+      headerTintColor: colors.WHITE,
+      headerStyle: {
+        backgroundColor: colors.LIGHTPURPLE
       }
-    },
-    NewCard: {
-      screen: CardNew,
-      navigationOptions: {
-        title: 'New Card',
-        headerTintColor: colors.WHITE,
-        headerStyle: {
-          backgroundColor: colors.LIGHTPURPLE
-        }
+    }
+  },
+  NewCard: {
+    screen: CardNew,
+    navigationOptions: {
+      title: 'New Card',
+      headerTintColor: colors.WHITE,
+      headerStyle: {
+        backgroundColor: colors.LIGHTPURPLE
       }
-    },
-    Quiz: {
-      screen: DecQuiz,
-      navigationOptions: {
-        title: 'Quiz',
-        headerTintColor: colors.WHITE,
-        headerStyle: {
-          backgroundColor: colors.LIGHTPURPLE
-        }
+    }
+  },
+  Quiz: {
+    screen: DecQuiz,
+    navigationOptions: {
+      title: 'Quiz',
+      headerTintColor: colors.WHITE,
+      headerStyle: {
+        backgroundColor: colors.LIGHTPURPLE
       }
     }
   }
-)
+})
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>
