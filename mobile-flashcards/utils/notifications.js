@@ -5,7 +5,7 @@ export const NOTIFICATION_KEY = 'flashcards:notifications'
 
 export function clearNotifications() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync())
+    .then(() => Notifications.cancelAllScheduledNotificationsAsync)
 }
 
 function createNotification(){
