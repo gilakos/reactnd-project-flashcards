@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import {
-  clearLocalNotification,
+  clearNotifications,
   setLocalNotification
 } from '../utils/notifications'
 
@@ -100,7 +100,7 @@ class DeckQuizView extends Component {
     } else {
       message = `You scored ${score}% in this quiz - keep studying.`
     }
-    clearLocalNotification().then(setLocalNotification)
+    clearNotifications().then(setLocalNotification)
     return (
       <View>
         <View style={styles.deckView}>
@@ -109,9 +109,9 @@ class DeckQuizView extends Component {
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonPrimary]}
-            onPress={() => navigation.navigate('Decks')}
+            onPress={() => navigation.goBack()}
           >
-            <Text style={styles.buttonTextPrimary}>Back to your Decks</Text>
+            <Text style={styles.buttonTextPrimary}>Back to this Deck</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.actionButton, styles.buttonSecondary]}
@@ -125,7 +125,7 @@ class DeckQuizView extends Component {
   }
   render() {
     const { deck, navigation } = this.props
-    const quiz_progress = `${this.state.question_index + 1} / ${
+    const quiz_progress = `${this.state.question_index} / ${
       deck.questions.length
     }`
     const quiz_score = `${this.state.answers_correct} / ${
